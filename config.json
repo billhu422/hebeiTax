@@ -1,0 +1,28 @@
+﻿{
+	"confortableResolution":{
+		"X":"1920",
+		"Y":"1080"
+	},
+	"standardResolution":{
+		"X":"1400",
+		"Y":"1050"
+	},
+	
+	"nationalTax":{
+		"path":"C:\\Servyou\\yqhs_hb\\hswy.exe runmode=xsb"
+	},
+	"localTax":{
+		"path":"C:\\Program Files (x86)\\css\\etax\\startup.exe"
+	},
+	
+	"CADrivers":[
+		{
+			"name":"liantongCA",
+			"path":"C:\\Program Files (x86)\\河北联通CA证书助手\\Certifhelper.exe"
+		},
+		{
+			"name":"hebeiCA",
+			"path":"C:\\Program Files (x86)\\河北CA\\数字证书助手\\HebcaP11Assistor.exe"
+		}
+	]
+}
