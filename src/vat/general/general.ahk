@@ -62,8 +62,12 @@ DeclareAll(){
 	;1.全选
 	CoordMode,Pixel,Screen  ; Interprets the coordinates below as relative to the screen rather than the active window.
 	ImageSearchWait(FoundX,FoundY,"..\..\..\res\national\vat\general\3.全选申报表.bmp")
+	;ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,..\..\..\res\national\vat\general\3.全选申报表.bmp
+	;consoleWrite(ErrorLevel)
+	;consoleWrite(FoundX)
+	;consoleWrite(FoundY)
 	CoordMode,Mouse,Screen
-	MouseMove,FoundX+28,FoundY+118,50
+	MouseMove,FoundX+25,FoundY+122,50
 	MouseClick,left,,,1
 	
 	;2.申报表发送
