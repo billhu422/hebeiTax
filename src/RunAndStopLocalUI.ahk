@@ -12,7 +12,7 @@ if !A_IsAdmin
 }
 
 ;example
-;StartLocalTaxUI()
+StartLocalTaxUI()
 ;Sleep 10000
 ;ForceStopNationalTaxUI()
 /**
@@ -43,15 +43,19 @@ StartLocalTaxUI(){
 	}
 	
 	;3.点击我已关注
-	Sleep 100
+	Sleep 2000
 	CoordMode,Pixel,Screen  ; Interprets the coordinates below as relative to the screen rather than the active window.
-	ImageSearchWait(FoundX,FoundY,"..\res\local\loginout\1.我已关注.bmp",10)
+	ImageSearchWait(FoundX,FoundY,"..\res\local\loginout\1.我已关注.bmp",10000)
+	;ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,..\res\local\loginout\1.我已关注.bmp
+	consoleWrite(FoundX)
+	consoleWrite(FoundY)
+	Sleep 100
 	CoordMode,Mouse,Screen
-	MouseMove,FoundX+40,FoundY+25,50
+	MouseMove,FoundX+40,FoundY+25,5
 	MouseClick,left,,,1
 	
 	;4.点击CA登录
-	Sleep 100
+	Sleep 2000
 	WinWaitActive, ahk_class TSignInForm, ,20
 	if ErrorLevel
 	{
@@ -61,25 +65,25 @@ StartLocalTaxUI(){
 	
 	CoordMode,Pixel,Screen  
 	ImageSearchWait(FoundX,FoundY,"..\res\local\loginout\2.CA登录.bmp")
-	consoleWrite(FoundX)
-	consoleWrite(FoundY)
+	;ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,..\res\local\loginout\2.CA登录.bmp
+	
 	CoordMode,Mouse,Screen
-	MouseMove,FoundX+10,FoundY+10,50
+	MouseMove,FoundX+10,FoundY+10,5
 	MouseClick,left,,,1
 	
-	Sleep 10000
-	
 	;5.等待识别CA
+	Sleep 5000
 	CoordMode,Pixel,Screen 
 	ImageSearchWait(FoundX,FoundY,"..\res\local\loginout\3.登录.bmp",20)
+	;ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,..\res\local\loginout\3.登录.bmp
 	consoleWrite(FoundX)
 	consoleWrite(FoundY)
 	CoordMode,Mouse,Screen
-	MouseMove,FoundX+163,FoundY+75,50
+	MouseMove,FoundX+163,FoundY+75,5
 	MouseClick,left,,,1	
 
 	;录入并验证PIN码
-	Sleep 100
+	Sleep 1000
 	WinWaitActive, ahk_class #32770, ,20
 	if ErrorLevel
 	{
