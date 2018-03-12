@@ -15,6 +15,7 @@ if !A_IsAdmin
 StartLocalTaxUI()
 ;Sleep 10000
 ;ForceStopNationalTaxUI()
+;test2()
 /**
 * Method: StartLocalTaxUI
 *     启动河北地税客户端软件，并进入地税报税页面
@@ -72,25 +73,26 @@ StartLocalTaxUI(){
 	MouseClick,left,,,1
 	
 	;5.等待识别CA
-	Sleep 5000
+	Sleep 10000
 	CoordMode,Pixel,Screen 
 	ImageSearchWait(FoundX,FoundY,"..\res\local\loginout\3.登录.bmp",20)
 	;ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,..\res\local\loginout\3.登录.bmp
 	consoleWrite(FoundX)
 	consoleWrite(FoundY)
 	CoordMode,Mouse,Screen
-	MouseMove,FoundX+163,FoundY+75,5
+	MouseMove,FoundX+163,FoundY+70,5
 	MouseClick,left,,,1	
 
 	;录入并验证PIN码
-	Sleep 1000
-	WinWaitActive, ahk_class #32770, ,20
+	Sleep 5000
+	WinGetClass, class1, A ;获取当前活动窗体的class
+	WinActivate,ahk_class %class1%
+	WinWaitActive,ahk_class %class1%,,20  ;联通CA 河北CA的PIN码录入框不同
 	if ErrorLevel
 	{
 		MsgBox, "等待PIN码框启动超过20秒" 
 		return %A_LastError%
 	}
-	
 	Send {1 down}{1 up}
 	Send {2 down}{2 up}
 	Send {3 down}{3 up}
@@ -122,4 +124,33 @@ ForceStopNationalTaxUI(){
 	
 	return 0
 }
+
+
+test2()
+{
+	Sleep 5000
+	a := WinExist("A")
+	consoleWrite(a)
+	WinGetClass, class1, A
+	consoleWrite(class1)
+	WinActivate
+	WinWaitActive,ahk_class %class1%,,20
+	if ErrorLevel
+	{
+		MsgBox, "等待PIN码框启动超过20秒" 
+		return %A_LastError%
+	}
+	Send {1 down}{1 up}
+	Send {2 down}{2 up}
+	Send {3 down}{3 up}
+	Send {4 down}{4 up}
+	Send {5 down}{5 up}
+	Send {6 down}{6 up}
+	Send {7 down}{7 up}
+	Send {8 down}{8 up}
+	
+	
+	
+}
+
 
