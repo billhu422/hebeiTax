@@ -11,7 +11,7 @@ if !A_IsAdmin
 }
 StartNationalTaxUI()
 ;ForceStopNationalTaxUI()
-
+;test2()
 
 /**
 * Method: StartNationalTaxUI
@@ -46,10 +46,37 @@ StartNationalTaxUI(){
 	;2.进入申报模块
 	CoordMode,Pixel,Screen  ; Interprets the coordinates below as relative to the screen rather than the active window.
 	ImageSearchWait(FoundX,FoundY,"..\res\national\loginout\1.申报纳税.bmp")
+	consoleWrite(FoundX)
+	consoleWrite(FoundY)
 	CoordMode,Mouse,Screen
 	MouseMove,FoundX+40,FoundY+30,50
 	MouseClick,left,,,1
 	
+	;2.1 录入河北CA的密码
+	Sleep 3000
+	a := WinExist("A")
+	consoleWrite(a)
+	WinGetClass, class1, A
+	consoleWrite(class1)
+	if (class1 = "Tfrm_Login")
+	{
+		WinActivate
+		WinWaitActive,ahk_class %class1%,,20
+		if ErrorLevel
+		{
+			MsgBox, "等待PIN码框启动超过20秒" 
+			return %A_LastError%
+		}
+		Send {1 down}{1 up}
+		Send {2 down}{2 up}
+		Send {3 down}{3 up}
+		Send {4 down}{4 up}
+		Send {5 down}{5 up}
+		Send {6 down}{6 up}
+		
+		Sleep 100
+		Send {Enter}
+	}
 	;3.确认核定和发票信息入库
 	WinWaitActive, ahk_class Tfrm_DispResult, ,20
 	if ErrorLevel
@@ -58,8 +85,10 @@ StartNationalTaxUI(){
 		return %A_LastError%
 	}
 	send {Enter}
+	;4.最大化办税系统主页面
+     WinMaximize,ahk_class Tfrm_MainFrame
 	
-	Sleep 10000
+	Sleep 5000
 	;4.申报表填写与编辑
 	CoordMode,Pixel,Screen  ; Interprets the coordinates below as relative to the screen rather than the active window.
 	ImageSearchWait(FoundX,FoundY,"..\res\national\loginout\2.申报表填写与编辑.bmp")
@@ -97,3 +126,7 @@ ForceStopNationalTaxUI(){
 	return 0
 }
 
+test2()
+{
+	     WinMaximize,ahk_class Tfrm_MainFrame
+}
