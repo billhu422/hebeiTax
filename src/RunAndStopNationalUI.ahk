@@ -53,7 +53,7 @@ StartNationalTaxUI(){
 	MouseClick,left,,,1
 	
 	;2.1 录入河北CA的密码
-	Sleep 3000
+	Sleep 10000
 	a := WinExist("A")
 	consoleWrite(a)
 	WinGetClass, class1, A

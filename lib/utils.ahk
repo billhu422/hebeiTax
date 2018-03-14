@@ -7,13 +7,18 @@ consoleWrite(contents){
 
 
 
-ImageSearchWait(ByRef X,ByRef Y,imagePath:="",waitSeconds:=1000){
+ImageSearchWait(ByRef X,ByRef Y,imagePath:="",waitMicrosecond :=1000){
 	TIMEOUT := waitSeconds
 	time_loopStart := A_tickCount
 	SLEEP_AFTER_EACH_IMAGESEARCH := 300
 	loop {
 		ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight,%imagePath%
-		if (ErrorLevel = 0 && FoundX<> "" && FoundY<>"")
+		;~ if(FoundX = "")
+		;~ {
+			;~ MsgBox,"FoundX 为空"
+			;~ return
+		;~ }
+		if (ErrorLevel = 0 and FoundX<> "" and FoundY<>"")
 		{
 			X:=FoundX
 			Y:=FoundY
